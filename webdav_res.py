@@ -48,7 +48,7 @@ def _in(json_in):
     options = json_in.get("source")
     client = wc.Client(options)
     picture_list = client.list(watched_folder)[1:]
-    new_pix = list(filter(lambda p: get_timestamp(client, watched_folder + p) > int(timestamp), picture_list))
+    new_pix = list(filter(lambda p: get_timestamp(client, os.path.join(watched_folder, p)) > int(timestamp), picture_list))
 
     with open(os.path.join(dest_dir, "pix.json"), "w") as outfile:
         json.dump(new_pix, outfile)
